@@ -228,9 +228,9 @@ export default function About() {
                     zIndex: 1,
                   }}
                 >
-                  {/* Replace /images/about.jpg with your own photo */}
+                  {/* Replace /images/about.jpeg with your own photo */}
                   <Image
-                    src="/images/about.jpg"
+                    src="/images/about.jpeg"
                     alt="Atul Parmar"
                     fill
                     style={{ objectFit: "cover" }}
