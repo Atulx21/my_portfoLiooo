@@ -388,6 +388,13 @@ export default function Hero() {
         backgroundColor: "#001D39",
       }}
     >
+      <style>{`
+        @media (max-width: 480px) {
+          .hero-available { font-size: 9px !important; letter-spacing: 0.08em !important; }
+          .hero-tech-row  { flex-wrap: wrap !important; gap: 16px !important; justify-content: center !important; }
+          .hero-cta       { margin-bottom: 40px !important; }
+        }
+      `}</style>
       {/* Layer 1 — Particle field */}
       <div ref={particleWrapRef} style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <ParticleField />
@@ -447,8 +454,9 @@ export default function Hero() {
               color: "#4E8EA2",
               userSelect: "none",
             }}
+            className="hero-available"
           >
-            [ AVAILABLE FOR OPPORTUNITIES ]
+          [ AVAILABLE FOR OPPORTUNITIES ]
           </span>
         </div>
 
@@ -496,6 +504,7 @@ export default function Hero() {
         {/* CTA buttons */}
         <div
           ref={ctaRef}
+          className="hero-cta"
           style={{
             display: "flex",
             gap: 16,
@@ -526,6 +535,7 @@ export default function Hero() {
           </span>
           <div
             ref={techRef}
+            className="hero-tech-row"
             style={{ display: "flex", gap: 28, alignItems: "flex-end" }}
           >
             {TECH_ICONS.map((tech, i) => (

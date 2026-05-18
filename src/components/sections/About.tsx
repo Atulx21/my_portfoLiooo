@@ -172,12 +172,16 @@ export default function About() {
             order: -1;
           }
         }
+        @media (max-width: 600px) {
+          .about-container { padding: 0 20px !important; }
+        }
         @media (max-width: 500px) {
           .about-image-outer {
-            transform: scale(0.8);
+            transform: scale(0.78);
             transform-origin: top center;
-            margin-bottom: -80px;
+            margin-bottom: -90px;
           }
+          .about-float-badge { display: none !important; }
         }
       `}</style>
 
@@ -191,7 +195,7 @@ export default function About() {
           overflowX: "clip",
         }}
       >
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }} className="about-container">
           <div className="about-grid">
 
             {/* ── LEFT — Image Block ──────────────────────────────────────── */}
@@ -240,6 +244,7 @@ export default function About() {
 
                 {/* Floating card — bottom-left, overlapping image by ~30px */}
                 <div
+                  className="about-float-badge"
                   style={{
                     position: "absolute",
                     bottom: -30,
@@ -277,6 +282,7 @@ export default function About() {
 
                 {/* Floating badge — top-right, overlapping image by ~20px */}
                 <div
+                  className="about-float-badge"
                   style={{
                     position: "absolute",
                     top: -20,

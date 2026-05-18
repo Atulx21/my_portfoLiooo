@@ -125,9 +125,10 @@ function EmailBlock() {
         <span
           style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: 20,
+            fontSize: "clamp(14px, 4vw, 20px)",
             color: "#BDD8E9",
             letterSpacing: "0.02em",
+            wordBreak: "break-all",
           }}
         >
           {PERSONAL_INFO.email}
@@ -415,7 +416,7 @@ export default function Contact() {
         style={{
           maxWidth: 700,
           width: "100%",
-          padding: "0 32px",
+          padding: "0 24px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

@@ -140,6 +140,7 @@ function ProjectCard({
   const Panel = (
     <div
       key="panel"
+      className="proj-panel"
       style={{
         position: "relative",
         padding: "52px 48px 52px 56px",
@@ -244,6 +245,7 @@ function ProjectCard({
   const ImagePane = (
     <div
       key="image"
+      className="proj-image"
       style={{ position: "relative", overflow: "hidden", minHeight: 380 }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -343,18 +345,29 @@ export default function Projects() {
         @media (max-width: 860px) {
           .proj-card { grid-template-columns: 1fr !important; }
         }
+        @media (max-width: 768px) {
+          .proj-outer  { padding: 80px 0 100px !important; }
+          .proj-inner  { padding: 0 20px !important; }
+          .proj-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; margin-bottom: 48px !important; }
+        }
+        @media (max-width: 600px) {
+          .proj-panel  { padding: 32px 20px 36px 24px !important; }
+          .proj-image  { min-height: 240px !important; }
+        }
       `}</style>
 
       <section
         ref={sectionRef}
         id="projects"
+        className="proj-outer"
         style={{ backgroundColor: "#00101E", padding: "120px 0 140px" }}
       >
-        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 48px" }}>
+        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 48px" }} className="proj-inner">
 
           {/* Header */}
           <div
             ref={headerRef}
+            className="proj-header"
             style={{
               display: "flex",
               alignItems: "flex-end",

@@ -165,6 +165,7 @@ html {
   cursor: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -174,6 +175,7 @@ body {
   line-height: 1.6;
   letter-spacing: 0.3px;
   transition: background-color var(--transition-base);
+  overflow-x: hidden;
 }
 
 @media (prefers-color-scheme: dark) {

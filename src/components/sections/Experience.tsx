@@ -24,6 +24,7 @@ function ExperienceCard({
       ref={cardRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="exp-card-inner"
       style={{
         backgroundColor: "#0A4174",
         border: `1px solid ${hovered ? "#4E8EA2" : "#49769F"}`,
@@ -288,27 +289,39 @@ export default function Experience() {
           gap: 0;
           position: relative;
         }
-        .exp-entry-left  { grid-column: 1; display: flex; justify-content: flex-end; padding-right: 32px; padding-bottom: 64px; }
+        .exp-entry-left  { grid-column: 1; padding-bottom: 64px; }
         .exp-entry-right { grid-column: 3; padding-left: 32px; padding-bottom: 64px; }
         .exp-entry-mid   { grid-column: 2; display: flex; flex-direction: column; align-items: center; }
-        /* On odd entries, card is on left side — mirror the columns */
-        .exp-entry.right-card .exp-entry-left  { visibility: hidden; }
-        .exp-entry.left-card  .exp-entry-right { visibility: hidden; }
+        /* Left-card: card (always in .exp-entry-right) moves to visual left column */
+        .exp-entry.left-card .exp-entry-right {
+          grid-column: 1;
+          grid-row: 1;
+          padding-left: 0;
+          padding-right: 32px;
+          display: flex;
+          justify-content: flex-end;
+        }
+        .exp-entry.left-card .exp-entry-left { grid-column: 3; grid-row: 1; }
+        .exp-entry.left-card .exp-entry-mid  { grid-column: 2; grid-row: 1; }
 
         @media (max-width: 767px) {
+          .exp-timeline-line { display: none; }
           .exp-entry {
             grid-template-columns: 28px 1fr;
           }
-          .exp-entry-left  { display: none; }
-          .exp-entry-mid   { grid-column: 1; }
-          .exp-entry-right { grid-column: 2; padding-left: 24px; }
-          /* For entries that are "left-card" on desktop, move to right on mobile */
-          .exp-entry.left-card .exp-entry-right {
-            visibility: visible;
+          .exp-entry-left  { display: none !important; }
+          .exp-entry-mid   { grid-column: 1 !important; grid-row: auto !important; }
+          .exp-entry-right {
+            grid-column: 2 !important;
+            grid-row: auto !important;
+            padding-left: 16px !important;
+            padding-right: 0 !important;
+            display: block !important;
           }
-          .exp-entry.left-card .exp-entry-left {
-            display: none;
-          }
+        }
+        @media (max-width: 480px) {
+          .exp-entry-right { padding-left: 12px !important; }
+          .exp-card-inner  { padding: 20px 18px !important; }
         }
       `}</style>
 
@@ -362,6 +375,7 @@ export default function Experience() {
 
             {/* SVG vertical line behind entries */}
             <svg
+              className="exp-timeline-line"
               style={{
                 position: "absolute",
                 left: "50%",
@@ -388,22 +402,14 @@ export default function Experience() {
 
             {/* Entries */}
             {EXPERIENCE.map((item, i) => {
-              const isLeft = i % 2 === 0; // even = card on LEFT, odd = card on RIGHT
+              const isLeft = i % 2 === 0;
               return (
                 <div
                   key={item.company}
                   className={`exp-entry ${isLeft ? "left-card" : "right-card"}`}
                 >
-                  {/* Left slot */}
-                  <div className="exp-entry-left">
-                    {isLeft && (
-                      <ExperienceCard
-                        item={item}
-                        side="left"
-                        cardRef={(el) => { cardRefs.current[i] = el; }}
-                      />
-                    )}
-                  </div>
+                  {/* Spacer slot — repositioned by CSS for left-card entries */}
+                  <div className="exp-entry-left" />
 
                   {/* Center dot */}
                   <div className="exp-entry-mid" style={{ paddingTop: 32 }}>
@@ -422,15 +428,13 @@ export default function Experience() {
                     />
                   </div>
 
-                  {/* Right slot */}
+                  {/* Card — always here; CSS moves it to column 1 for left-card entries */}
                   <div className="exp-entry-right">
-                    {!isLeft && (
-                      <ExperienceCard
-                        item={item}
-                        side="right"
-                        cardRef={(el) => { cardRefs.current[i] = el; }}
-                      />
-                    )}
+                    <ExperienceCard
+                      item={item}
+                      side={isLeft ? "left" : "right"}
+                      cardRef={(el) => { cardRefs.current[i] = el; }}
+                    />
                   </div>
                 </div>
               );

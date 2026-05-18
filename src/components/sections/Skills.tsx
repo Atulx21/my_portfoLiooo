@@ -352,7 +352,12 @@ export default function Skills() {
       {/* Circuit pattern background */}
       <CircuitPattern />
 
-      <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+      <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "0 48px" }} className="skills-inner">
+        <style>{`
+          @media (max-width: 768px) {
+            .skills-inner { padding: 0 20px !important; }
+          }
+        `}</style>
         {/* ── Section header ─────────────────────────────────────────────── */}
         <div
           ref={headerRef}
